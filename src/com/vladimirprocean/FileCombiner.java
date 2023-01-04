@@ -42,24 +42,18 @@ public class FileCombiner {
                 }
             }
             if (flag == 0) {
-                insertElement(words[i], distinctArray);
-//                distinctArray[index] = words[i];
+                distinctArray = insertElement(words[i], distinctArray);
                 index++;
-                for (int k = 0; k < distinctArray.length; k++) {
-                    System.out.println(distinctArray[k]);
-                }
             }
-        }
-        for (int i = 0; i < distinctArray.length; i++) {
-            System.out.println(distinctArray[i]);
+
         }
         return distinctArray;
     }
 
     private void saveStringToFile(String[] strArray, File file) {
         for (int i = 0; i < strArray.length; i++) {
-            try (Writer writer = new FileWriter(file, true)) {
-                writer.write(strArray[i]);
+            try (Writer writer = new FileWriter(file,true)) {
+                writer.write((strArray[i] + ","));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -67,16 +61,15 @@ public class FileCombiner {
 
     }
 
-    private void insertElement(String elem, String[] array) {
+    private String[] insertElement(String elem, String[] array) {
         int count = 0;
-        String[]temp = new String[0];
         String[] newArr = new String[array.length + 1];
             for (int i = 0; i < array.length; i++) {
                 newArr[i] = array[i];
                 count++;
             }
-            array = newArr;
-            array[count] =elem;
+            newArr[count] = elem;
+            return newArr;
         }
 
 }
